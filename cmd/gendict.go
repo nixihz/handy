@@ -113,7 +113,7 @@ func run(cmd *cobra.Command, args []string) {
 	writeFile(html, "./web/html/"+dbname+".html")
 	writeFile(out, "./web/markdown/"+dbname+".md")
 	println("generate md file: ./web/markdown/" + dbname + ".md")
-	println("generate html file: ./web/html/" + dbname + ".md")
+	println("generate html file: ./web/html/" + dbname + ".html")
 }
 
 func writeFile(content string, filePath string) {
