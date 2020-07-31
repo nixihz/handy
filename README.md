@@ -2,12 +2,12 @@
 
 🧰 一个趁手的工具箱 
 ## Contents
-[TOC]
 
 ## Installation
 ```
 go build handy.go
 mv handy /usr/local/bin/
+
 ```
 
 ### 生成数据库字典
@@ -15,14 +15,13 @@ mv handy /usr/local/bin/
 生成markdown文件存放在 `/web/markdown`, html 文件存放`/web/html` 
 
 ```
-handy gendict --host 127.0.0.1 -P 3306 -u root -p test_pwd -d test
-
+./handy gendict --host 127.0.0.1 -P 3306 -u root -p test_pwd -d test
 ```
 
 ### 数据库字典在线查看服务
 
 ```
-handy servedict -p 8080
+./handy servedict -p 8080
 
 ```
 
