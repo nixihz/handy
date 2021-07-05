@@ -1,4 +1,5 @@
 .idea/
+vendor
 handy
 web/html
 web/markdown
