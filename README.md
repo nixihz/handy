@@ -5,6 +5,8 @@
 
 ## Installation
 ```
+
+export HANDY_WORK_DIR=.
 go build handy.go
 mv handy /usr/local/bin/
 

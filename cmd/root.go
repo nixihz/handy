@@ -37,9 +37,9 @@ func initConfig() {
 	viper.SetConfigName(cfgFile)
 	viper.AutomaticEnv()
 	viper.AddConfigPath(filePath)
-	workDir := os.Getenv("RICH_WORK_DIR")
+	workDir := os.Getenv("HANDY_WORK_DIR")
 	if workDir == "" {
-		fmt.Print("error RICH_WORK_DIR env is not set.")
+		fmt.Print("error HANDY_WORK_DIR env is not set.")
 		os.Exit(2)
 	}
 
