@@ -64,7 +64,7 @@ func publish(cmd *cobra.Command, args []string) {
 			nn := strings.Index(levelTwoPageMdStr, "\n\n")
 			levelTwoPageMdStr = levelTwoPageMdStr[nn+2:]
 
-			writeNewFile(strings.Replace(levelTwoPageMdStr, "![](", "![](/images/", 1), postsDir+levelOneTitle, title+".md")
+			writeNewFile(strings.Replace(levelTwoPageMdStr, "![](", "![](/images/", -1), postsDir+levelOneTitle, title+".md")
 
 			levelThreeContent := levelTwoPage.Root().Content
 			for _, block := range levelThreeContent {
