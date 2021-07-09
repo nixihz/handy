@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path"
 	"strings"
 
 	"github.com/kjk/notionapi"
@@ -44,6 +45,13 @@ func publish(cmd *cobra.Command, args []string) {
 	rootPage, _ := client.DownloadPage(pageID)
 
 	levelOneIds := rootPage.GetSubPages()
+
+	dir, _ := ioutil.ReadDir(postsDir)
+	for _, d := range dir {
+		// todo 删除
+		os.RemoveAll(path.Join([]string{postsDir, d.Name()}...))
+	}
+
 	for _, levelOneId := range levelOneIds {
 		// 第一级分类
 		levelOnePage, _ := client.DownloadPage(levelOneId)
