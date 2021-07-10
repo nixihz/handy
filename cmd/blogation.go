@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/spf13/viper"
 	"io/ioutil"
 	"log"
 	"os"
@@ -17,29 +18,22 @@ import (
 // blogationCmd represents the blogation command
 var blogationCmd = &cobra.Command{
 	Use:   "blogation",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	Run: publish,
+	Short: "sync notion page to hugo blog",
+	Long:  `sync notion page to hugo blog`,
+	Run:   publish,
 }
 
 func init() {
 	rootCmd.AddCommand(blogationCmd)
 }
 
-var logf = log.Printf
-var panicIf = log.Panic
-
 func publish(cmd *cobra.Command, args []string) {
-	fmt.Println("blogation called")
-	authToken2 := "3fae99bf3ebd3573ad80a8cc13dad050cad2094d5c03c8a6f1cde859562be8ecc392723ae668859d3a5e777d6ae4bdcb8a2fa95441f84f7bac8da9c6111e2c2ad9fbf1d168ae43392ac94f4d2e32"
-	pageID := "47d84abb6c0b4e0eb799eec100785fab"
-	postsDir := "/Users/admin/Documents/fencex.github.io/content/posts/"
-	imageDir := "/Users/admin/Documents/fencex.github.io/static/images"
+	fmt.Println("blogation generating")
+
+	authToken2 := viper.GetString("authToken2")
+	pageID := viper.GetString("pageID")
+	postsDir := viper.GetString("postsDir")
+	imageDir := viper.GetString("imageDir")
 
 	client := &notionapi.Client{AuthToken: authToken2}
 	rootPage, _ := client.DownloadPage(pageID)
@@ -85,6 +79,8 @@ func publish(cmd *cobra.Command, args []string) {
 			}
 		}
 	}
+
+	fmt.Println("blogation generated")
 }
 
 func getImageName(source string) string {
@@ -98,7 +94,7 @@ func getImageName(source string) string {
 }
 
 func getIndexContent(title string) string {
-	return "---\ntitle: " + title + "\nbookToc: false\nbookCollapseSection: true\n\n---\nmd\n\n"
+	return "---\ntitle: " + title + "\nbookToc: false\nbookCollapseSection: false\n\n---\nmd\n\n"
 }
 
 func writeNewFile(content string, path string, filename string) {
