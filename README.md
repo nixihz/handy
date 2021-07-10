@@ -31,7 +31,23 @@ cp configs/prod-example.yaml configs/prod.yaml
 ### 在 shell 中查看 markdown
 
 ```
-handy mdview ./README.md
+./handy mdview ./README.md
+
+```
+
+### notion 同步到 hugo 博客
+
+配置 configs/prod.yaml
+```
+authToken2: ""
+pageID: ""
+postsDir: ""
+imageDir: ""
+```
+执行
+
+```
+./handy blogation
 
 ```
 
