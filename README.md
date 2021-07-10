@@ -9,6 +9,7 @@
 export HANDY_WORK_DIR=.
 go build handy.go
 mv handy /usr/local/bin/
+cp configs/prod-example.yaml configs/prod.yaml
 
 ```
 

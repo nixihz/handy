@@ -1,4 +1,5 @@
 .idea/
+configs/prod.yaml
 vendor
 handy
 web/html
