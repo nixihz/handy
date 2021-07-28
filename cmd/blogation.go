@@ -15,7 +15,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// blogationCmd represents the blogation command
 var blogationCmd = &cobra.Command{
 	Use:   "blogation",
 	Short: "sync notion page to hugo blog",
@@ -42,7 +41,9 @@ func publish(cmd *cobra.Command, args []string) {
 
 	dir, _ := ioutil.ReadDir(postsDir)
 	for _, d := range dir {
-		// todo 删除
+		if d.Name() == "_index.md" {
+			continue
+		}
 		os.RemoveAll(path.Join([]string{postsDir, d.Name()}...))
 	}
 
@@ -51,8 +52,8 @@ func publish(cmd *cobra.Command, args []string) {
 		levelOnePage, _ := client.DownloadPage(levelOneId)
 		levelOneTitle := levelOnePage.Root().GetTitle()[0].Text
 
-		indexText := getIndexContent(levelOneTitle)
-		writeNewFile(indexText, postsDir+levelOneTitle, "_index.md")
+		//indexText := getIndexContent(levelOneTitle)
+		//writeNewFile(indexText, postsDir+levelOneTitle, "_index.md")
 
 		levelTwoIds := levelOnePage.GetSubPages()
 		for _, levelTwoId := range levelTwoIds {
