@@ -1,4 +1,4 @@
-module handy
+module github.com/fencex/handy
 
 go 1.14
 
