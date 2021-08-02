@@ -2,9 +2,9 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/fencex/handy/utils"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"handy/utils"
 	"os"
 )
 

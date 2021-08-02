@@ -1,11 +1,11 @@
 package cmd
 
 import (
+	"github.com/fencex/handy/models"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/russross/blackfriday"
 	"github.com/spf13/cobra"
-	"handy/models"
 	"io/ioutil"
 	"log"
 	"os"
