@@ -13,6 +13,12 @@ cp configs/prod-example.yaml configs/prod.yaml
 
 ```
 
+## 工具箱
+增加环境变量
+```
+export HANDY_WORK_DIR=.
+```
+
 ### 生成数据库字典
 
 生成markdown文件存放在 `/web/markdown`, html 文件存放`/web/html` 
