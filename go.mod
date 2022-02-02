@@ -1,9 +1,9 @@
-module handy
+module github.com/fencex/handy
 
 go 1.14
 
 require (
-	github.com/gin-gonic/gin v1.6.3
+	github.com/gin-gonic/gin v1.7.2
 	github.com/jinzhu/gorm v1.9.15
 	github.com/kjk/notion v0.1.1-0.20210531202601-d7dea041d977
 	github.com/kjk/notionapi v0.0.0-20211028034950-2e9972f6a5ea

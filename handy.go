@@ -1,6 +1,6 @@
 package main
 
-import "handy/cmd"
+import "github.com/fencex/handy/cmd"
 
 func main() {
 	cmd.Execute()

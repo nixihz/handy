@@ -9,7 +9,14 @@
 export HANDY_WORK_DIR=.
 go build handy.go
 mv handy /usr/local/bin/
+cp configs/prod-example.yaml configs/prod.yaml
 
+```
+
+## 工具箱
+增加环境变量
+```
+export HANDY_WORK_DIR=.
 ```
 
 ### 生成数据库字典
@@ -30,7 +37,23 @@ mv handy /usr/local/bin/
 ### 在 shell 中查看 markdown
 
 ```
-handy mdview ./README.md
+./handy mdview ./README.md
+
+```
+
+### notion 同步到 hugo 博客
+
+配置 configs/prod.yaml
+```
+authToken2: ""
+pageID: ""
+postsDir: ""
+imageDir: ""
+```
+执行
+
+```
+./handy blogation
 
 ```
 

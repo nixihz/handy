@@ -2,9 +2,9 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/fencex/handy/utils"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"handy/utils"
 	"os"
 )
 
@@ -43,13 +43,11 @@ func initConfig() {
 		os.Exit(2)
 	}
 
-	print(workDir + "/configs")
 	viper.AddConfigPath(workDir + "/configs")
 	viper.AddConfigPath("configs")
 	viper.AddConfigPath("../configs")
 	viper.AddConfigPath("build/configs")
 	viper.SetConfigType("yaml")
-	//viper.WatchConfig()
 
 	if err := viper.ReadInConfig(); err != nil {
 	}

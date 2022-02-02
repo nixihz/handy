@@ -14,33 +14,24 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// blogationCmd represents the blogation command
 var blogationCmd = &cobra.Command{
 	Use:   "blogation",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	Run: publish,
+	Short: "sync notion page to hugo blog",
+	Long:  `sync notion page to hugo blog`,
+	Run:   publish,
 }
 
 func init() {
 	rootCmd.AddCommand(blogationCmd)
 }
 
-var logf = log.Printf
-var panicIf = log.Panic
-
 func publish(cmd *cobra.Command, args []string) {
-	fmt.Println("blogation called")
-	authToken2 := "399cba2cad29b8f64f33fc0007b5145ca3486f867d6c04303feb9d1f0f857e177d8a5276f47f82cb62dc64ec7f2365538250d0b7e5b90a87061fbd7cd745c477799f5ef41919c81126c948887593"
-	pageID := "47d84abb6c0b4e0eb799eec100785fab"
-	workDir := os.Getenv("HANDY_WORK_DIR")
-	postsDir := workDir + "/content/"
-	imageDir := workDir + "/static/images"
+	fmt.Println("blogation generating")
+
+	authToken2 := viper.GetString("authToken2")
+	pageID := viper.GetString("pageID")
+	postsDir := viper.GetString("postsDir")
+	imageDir := viper.GetString("imageDir")
 
 	client := &notionapi.Client{AuthToken: authToken2}
 	rootPage, _ := client.DownloadPage(pageID)
@@ -92,6 +83,8 @@ func publish(cmd *cobra.Command, args []string) {
 			}
 		}
 	}
+
+	fmt.Println("blogation generated")
 }
 
 func getImageName(source string) string {
@@ -105,7 +98,7 @@ func getImageName(source string) string {
 }
 
 func getIndexContent(title string) string {
-	return "---\ntitle: " + title + "\nbookToc: false\nbookCollapseSection: true\n\n---\nmd\n\n"
+	return "---\ntitle: " + title + "\nbookToc: false\nbookCollapseSection: false\n\n---\nmd\n\n"
 }
 
 func writeNewFile(content string, path string, filename string) {
