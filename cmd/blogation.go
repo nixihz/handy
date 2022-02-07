@@ -8,6 +8,7 @@ import (
 	"os"
 	"path"
 	"strings"
+	"time"
 
 	"github.com/kjk/notionapi"
 	"github.com/kjk/notionapi/tomarkdown"
@@ -24,9 +25,15 @@ var blogationCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(blogationCmd)
+
+	var removeAll string
+	blogationCmd.Flags().StringVarP(&removeAll, "removeAll", "r", "0", "0 false|1 true")
+
 }
 
 func publish(cmd *cobra.Command, args []string) {
+	removeAll, _ := cmd.Flags().GetString("removeAll")
+
 	fmt.Println("blogation generating")
 
 	authToken2 := viper.GetString("authToken2")
@@ -39,23 +46,37 @@ func publish(cmd *cobra.Command, args []string) {
 
 	levelOneIds := rootPage.GetSubPages()
 
-	dir, _ := ioutil.ReadDir(postsDir)
-	for _, d := range dir {
-		// todo 删除
-		if d.IsDir() {
-			os.RemoveAll(path.Join([]string{postsDir, d.Name()}...))
+	if removeAll == "1" {
+		println("清空数据重新生成!")
+
+		dir, _ := ioutil.ReadDir(postsDir)
+		for _, d := range dir {
+			// todo 删除
+			if d.IsDir() {
+				os.RemoveAll(path.Join([]string{postsDir, d.Name()}...))
+			}
 		}
 	}
 
+	// 不清理所有，则只是更新最近1天的文章
+	compareTime := time.Now().AddDate(0, 0, -1).Unix() * 1000
+	if removeAll == "1" {
+		// 清理所有
+		compareTime = 0
+	}
 	for _, levelOneId := range levelOneIds {
 		// 第一级分类
 		levelOnePage, _ := client.DownloadPage(levelOneId.DashID)
 		levelOneTitle := levelOnePage.Root().GetTitle()[0].Text
-		println(levelOneTitle)
+		if levelOnePage.Root().LastEditedTime < compareTime {
+			println(levelOneTitle + " not modified!")
+		} else {
+			println(levelOneTitle)
 
-		indexText := getIndexContent(levelOneTitle)
-		if levelOneTitle != "menu" {
-			writeNewFile(indexText, postsDir+levelOneTitle, "_index.md")
+			indexText := getIndexContent(levelOneTitle)
+			if levelOneTitle != "menu" {
+				writeNewFile(indexText, postsDir+levelOneTitle, "_index.md")
+			}
 		}
 
 		levelTwoIds := levelOnePage.GetSubPages()
@@ -64,7 +85,12 @@ func publish(cmd *cobra.Command, args []string) {
 			// 第二级文章
 			levelTwoPage, _ := client.DownloadPage(levelTwoId.DashID)
 			title := levelTwoPage.Root().GetTitle()[0].Text
-			println("\t" + title)
+			if levelTwoPage.Root().LastEditedTime < compareTime {
+				println("\t" + title + " not modified!")
+				continue
+			} else {
+				println("\t" + title)
+			}
 
 			// 修改 markdown 文件
 			levelTwoPageMdStr := string(tomarkdown.ToMarkdown(levelTwoPage))
@@ -88,6 +114,9 @@ func publish(cmd *cobra.Command, args []string) {
 	fmt.Println("blogation generated")
 }
 
+/**
+ * 获取文件名
+ */
 func getImageName(source string) string {
 	//input:https://s3-us-west-2.amazonaws.com/secure.notion-static.com/820803a1-f8d4-4a35-95a8-e251bb961c09/wallpaper.png
 	//output:wallpaper-820803a1-f8d4-4a35-95a8-e251bb961c09
@@ -98,10 +127,16 @@ func getImageName(source string) string {
 	return filenameParts[0] + "-" + parts[len(parts)-2] + "." + filenameParts[1]
 }
 
+/**
+ * 统一的 index 的内容
+ */
 func getIndexContent(title string) string {
 	return "---\ntitle: " + title + "\nbookToc: false\nbookCollapseSection: false\n\n---\nmd\n\n"
 }
 
+/**
+ * 写入文件
+ */
 func writeNewFile(content string, path string, filename string) {
 	if _, err := os.Stat(path); os.IsNotExist(err) {
 		os.MkdirAll(path, 0755)
