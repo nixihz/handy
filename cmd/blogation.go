@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/fencex/handy/pkg/notionservice/tomarkdown"
 	"github.com/spf13/viper"
 	"io/ioutil"
 	"log"
@@ -11,7 +12,6 @@ import (
 	"time"
 
 	"github.com/kjk/notionapi"
-	"github.com/kjk/notionapi/tomarkdown"
 
 	"github.com/spf13/cobra"
 )
