@@ -3,6 +3,7 @@ package tomarkdown
 import (
 	"bytes"
 	"fmt"
+	"reflect"
 	"strings"
 
 	"github.com/kjk/notionapi"
@@ -324,6 +325,41 @@ func (c *Converter) RenderCode(block *notionapi.Block) {
 		c.Printf(ind + part + "\n")
 	}
 	c.Printf("````\n")
+}
+
+// RenderTable renders table
+func (c *Converter) RenderTable(block *notionapi.Block) {
+
+	divLine := "|"
+	for i, i2 := range block.Content {
+		c.Printf("|")
+		if i2.Type == "table_row" {
+			for _, v := range i2.Properties {
+				str := getInterfaceString(v)
+				c.Printf(str + "|")
+				divLine += "----|"
+			}
+		}
+		c.Printf("\n")
+		divLine += "\n"
+		if i == 0 {
+			c.Printf(divLine)
+		}
+	}
+}
+
+func getInterfaceString(v interface{}) string {
+	str := ""
+	refType := reflect.TypeOf(v).String()
+	if refType == "string" {
+		str = fmt.Sprintf("%v", v)
+	} else if refType == "[]interface {}" {
+		v2, _ := v.([]interface{})
+		for _, i3 := range v2 {
+			str = getInterfaceString(i3)
+		}
+	}
+	return str
 }
 
 func (c *Converter) renderRootPage(block *notionapi.Block) {
@@ -683,6 +719,8 @@ func (c *Converter) DefaultRenderFunc(blockType string) func(*notionapi.Block) {
 		return c.RenderDivider
 	case notionapi.BlockCode:
 		return c.RenderCode
+	case "table":
+		return c.RenderTable
 	case notionapi.BlockBookmark:
 		return c.RenderBookmark
 	case notionapi.BlockImage:
