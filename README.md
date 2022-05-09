@@ -57,3 +57,11 @@ imageDir: ""
 
 ```
 
+### 分析代码词频
+分析项目中的代码，去掉语言关键词后的词频统计，导出 csv 文件后可在线生成`词云图`
+
+```shell
+./handy wordcloud /path/to/project /path/to/output
+
+```
+
