@@ -8,6 +8,7 @@ import (
 	"log"
 	"os"
 	"path"
+	"regexp"
 	"strings"
 	"time"
 
@@ -97,6 +98,9 @@ func publish(cmd *cobra.Command, args []string) {
 			nn := strings.Index(levelTwoPageMdStr, "\n\n")
 			levelTwoPageMdStr = levelTwoPageMdStr[nn+2:]
 
+			// Mermaid transport
+			levelTwoPageMdStr = transMermaid(levelTwoPageMdStr)
+
 			writeNewFile(strings.Replace(levelTwoPageMdStr, "![](", "![](/images/", -1), postsDir+levelOneTitle, title+".md")
 
 			levelThreeContent := levelTwoPage.Root().Content
@@ -112,6 +116,13 @@ func publish(cmd *cobra.Command, args []string) {
 	}
 
 	fmt.Println("blogation generated")
+}
+
+func transMermaid(input string) string {
+	m1 := regexp.MustCompile("````Mermaid([\\S\\s\\n]*)````")
+	str := m1.ReplaceAllString(input, "{{<mermaid>}}\n$1{{</mermaid>}}\n")
+
+	return str
 }
 
 /**

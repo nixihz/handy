@@ -6,7 +6,7 @@ require (
 	github.com/gin-gonic/gin v1.7.2
 	github.com/jinzhu/gorm v1.9.15
 	github.com/kjk/notion v0.1.1-0.20210531202601-d7dea041d977
-	github.com/kjk/notionapi v0.0.0-20211028034950-2e9972f6a5ea
+	github.com/kjk/notionapi v0.0.0-20220825184122-1127e60626b6
 	github.com/kjk/u v0.0.0-20210327060556-13ea33918991
 	github.com/olekukonko/tablewriter v0.0.4 // indirect
 	github.com/russross/blackfriday v1.5.2

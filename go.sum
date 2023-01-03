@@ -104,10 +104,10 @@ github.com/kjk/common v0.0.0-20211010101831-6203abf05163 h1:iwH0ioFLk58sU4CCis60
 github.com/kjk/common v0.0.0-20211010101831-6203abf05163/go.mod h1:bZoW8+ube8gSUMxdvIMVBw97o5gepeZqlCD8V+0MWXg=
 github.com/kjk/notion v0.1.1-0.20210531202601-d7dea041d977 h1:jDpjL3v0GNBXimLRAuzBCPdn8usT8pVhvgUBvsv0n7c=
 github.com/kjk/notion v0.1.1-0.20210531202601-d7dea041d977/go.mod h1:MsNU2/gwjOBAxiHrOq4pm74oi2Xhcxgb7wlNfhWB6gM=
-github.com/kjk/notionapi v0.0.0-20211028034950-2e9972f6a5ea h1:k51nCYYQnuCZ7iqSAsEdycdHgIhCxKzo6T450DZA2q8=
-github.com/kjk/notionapi v0.0.0-20211028034950-2e9972f6a5ea/go.mod h1:wwqdV3Qb7nAAyRXcpXkmrBNTu+8QoNvo5RDyEnYhpHM=
-github.com/kjk/siser v0.0.0-20210621233355-17e67ed4384f h1:X3X0zk+W4FIR4LvlT4BQbHMXM3rj2Ba6P4nZ8MkVPqM=
-github.com/kjk/siser v0.0.0-20210621233355-17e67ed4384f/go.mod h1:k2Pzb2Ix2MoXVfVLt3SeCEhwammA4PTgLxjDBhIUHoA=
+github.com/kjk/notionapi v0.0.0-20220825184122-1127e60626b6 h1:A7RCbKTY7ydu0f+lCEZvMz1TJ0607vkGralYV0Hs/no=
+github.com/kjk/notionapi v0.0.0-20220825184122-1127e60626b6/go.mod h1:wcKCl5S0pVbd15s1KfTsKxRdLEpscM+MCzeJmbRaU3s=
+github.com/kjk/siser v0.0.0-20220410204903-1b1e84ea1397 h1:OUgj4KSdIQeZfLSXR4WeUb3tRbWVGIXdlv9SfJJmbeg=
+github.com/kjk/siser v0.0.0-20220410204903-1b1e84ea1397/go.mod h1:k2Pzb2Ix2MoXVfVLt3SeCEhwammA4PTgLxjDBhIUHoA=
 github.com/kjk/u v0.0.0-20210327060556-13ea33918991 h1:5YrkYcROqlUoQlE85JkQ8IEXw+92fjfFc+V8WC3GiBo=
 github.com/kjk/u v0.0.0-20210327060556-13ea33918991/go.mod h1:s2xfEXn9o5pPRiY8Z5TC5ALE117lAG9g6t5mkwoYM4o=
 github.com/klauspost/cpuid v1.2.3/go.mod h1:Pj4uuM528wm8OyEC2QMXAi2YiTZ96dNQPGgoMS4s3ek=
