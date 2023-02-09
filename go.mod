@@ -3,7 +3,7 @@ module github.com/fencex/handy
 go 1.14
 
 require (
-	github.com/gin-gonic/gin v1.7.2
+	github.com/gin-gonic/gin v1.7.7
 	github.com/jinzhu/gorm v1.9.15
 	github.com/kjk/notionapi v0.0.0-20220825184122-1127e60626b6
 	github.com/olekukonko/tablewriter v0.0.4 // indirect
